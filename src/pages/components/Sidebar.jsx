@@ -6,7 +6,7 @@ const Sidebar = ({ onCategorySelect }) => {
   const categories = Array.from(new Set(products.flatMap((product) => product.categories)));
 
   return (
-    <aside className="w-1/4 pr-4 leading-loose">
+    <aside className="w-1/4 pr-4 leading-loose ixed top-0 left-0">
       <h2 className="font-bold text-left bg-customBlack text-white p-2 rounded-t-xl">
         ALL DEPARTMENTS
       </h2>

@@ -18,7 +18,7 @@ const Guaranteed = () => {
   return (
     <div className="mt-4">
       <h3 className="w-full py-2 text-center">GUARANTEED <span className="text-customBlue">SAFE</span> CHECKOUT</h3>
-      <div className="flex justify-between mb-2 gap-2">
+      <div className="flex flex-wrap justify-center gap-3 mb-3">
         {["Bitcoin", "Ethereum", "Dogecoin", "Tether", "USD Coin", "Other"].map(
           (crypto) => (
             <img

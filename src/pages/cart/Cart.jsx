@@ -31,9 +31,9 @@ const CartItem = ({ product, onUpdateQuantity }) => (
         </p>
       </div>
     </td>
-    <td className="py-4">${product.price.toFixed(2)}</td>
+    <td className="py-4 price">${product.price.toFixed(2)}</td>
     <td className="py-4">{product.sku}</td>
-    <td className="py-4">
+    <td className="py-4 quantity">
       <div className="flex items-center border rounded w-max">
         <button
           className="px-2 py-1 w-8 text-center"
@@ -154,7 +154,7 @@ const Cart = () => {
               )}
             </tbody>
           </table>
-          <div className="flex justify-between mt-4">
+          <div className="button-coupon flex justify-between mt-4">
             <div className="flex">
               <input
                 type="text"
@@ -164,7 +164,7 @@ const Cart = () => {
               <button className="bg-gray-200 px-4 py-2">OK</button>
             </div>
             <button
-              className="flex items-center bg-gray-200 px-4 py-2"
+              className="clear flex items-center bg-gray-200 px-4 py-2"
               onClick={clearCart}
             >
               <Trash2 size={16} className="mr-2" />

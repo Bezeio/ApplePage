@@ -29,7 +29,10 @@ const Products = () => {
       <div className="flex">
         <Sidebar onCategorySelect={handleCategorySelect}/>
         <div className="w-3/4">
+        <nav className=" lg:justify-between lg:items-center ">
+
           <Navbar onCategorySelect={handleCategorySelect}/>
+          </nav>
           <h1 className="text-4xl font-bold mb-4">BUY IPHONE WITH BITCOIN</h1>
           <h2 className="text-2xl mb-4">BUY APPLE PRODUCTS WITH CRYPTO</h2>
           <p className="text-customGray text-left mb-8">
@@ -41,8 +44,8 @@ const Products = () => {
           </p>
 
           {/* Product grid */}
-          <div className="grid grid-cols-3 gap-8">
-            {filteredProducts.map((product) => (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredProducts.map((product) => (
               <div key={product.id} className="border p-4 rounded-lg">
                 <Link to={`/product/${product.id}`}>
                   <div className="relative mb-4">

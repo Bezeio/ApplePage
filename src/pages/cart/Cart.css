@@ -1,32 +1,75 @@
 @media screen and (max-width: 1000px) {
-    thead {
-      display: none;
-    }
-  
-    tbody tr {
-      display: block;
-      margin-bottom: 10px;
-      border-bottom: 2px solid #ddd;
-    }
-  
-    tbody td {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 5px;
-      border: none;
-      border-bottom: 1px solid #ddd;
-      position: relative;
-    }
-  
-    tbody td:before {
-      content: attr(data-label); /* Use data-label attribute for headers */
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-weight: bold;
-      background: #f9f9f9;
-      padding: 5px;
-      width: 50%;
-      text-align: left;
-    }
+  /* Ẩn thead trên màn hình nhỏ */
+  thead {
+    display: none;
   }
+
+  /* Điều chỉnh hiển thị của các hàng */
+  tr {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 0;
+  }
+
+  /* Ẩn cột giá */
+  tr .price {
+    display: none;
+  }
+
+  /* Điều chỉnh hiển thị của cột sản phẩm */
+  tr td:first-child {
+    width: 100%;
+    display: flex;
+    align-items: flex-center;
+    margin-bottom: 10px;
+  }
+
+  /* Điều chỉnh hiển thị của hình ảnh sản phẩm */
+  tr td:first-child img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+  }
+
+  /* Điều chỉnh hiển thị của thông tin sản phẩm */
+  tr td:first-child div {
+    flex: 1;
+  }
+
+  /* Hiển thị SKU, subtotal và nút xóa trên cùng một hàng */
+  tr td:nth-child(3),
+  tr td:nth-child(4),
+  tr td:nth-child(5) {
+    flex: 1;
+    text-align: center;
+    padding: 5px;
+  }
+
+  /* Điều chỉnh hiển thị của phần quantity */
+  tr .quantity {
+    width: 100%;
+    display: flex;
+    justify-content: flex-center;
+    padding-top: 5px
+  }
+
+  tr td:nth-child(4)::before {
+    content: "Subtotal: ";
+    font-weight: bold;
+    padding-top: 2px;
+    padding-right: 5px
+  }
+  tr td:nth-child(5) {
+    padding-top: 8px ;
+    padding-right: 5px 
+  }
+  .button-coupon {
+    flex-direction: column;
+    gap: 10px;
+  }
+  ..button-coupon .clear {
+    display: flex;
+    flex-direction: row
+  }
+}
