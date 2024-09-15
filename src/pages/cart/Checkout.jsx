@@ -84,8 +84,8 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="flex justify-between p-4 max-w-[80%] mx-auto">
-      <div className="w-2/3 pr-4">
+    <div className="flex flex-col md:flex-row justify-between p-4 lg:max-w-[80%] mx-auto">
+      <div className="md:w-2/3 md:pr-4">
         <div className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-2xl font-bold mb-4">BILLING DETAILS</h2>
           <form className="space-y-4">
@@ -201,7 +201,7 @@ const CheckoutPage = () => {
           </form>
         </div>
       </div>
-      <div className="w-1/3">
+      <div className="md:w-1/3">
         <div className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-2xl font-bold mb-4">YOUR ORDER</h2>
           {cart.length > 0 ? (
@@ -283,11 +283,28 @@ const CheckoutPage = () => {
             type="submit"
             className="w-full bg-black text-white py-2 px-4 rounded mt-4 hover:bg-gray-800"
             onClick={() => {
-              navigate("/order-confirmation");
+              if (
+                billingDetails.firstName &&
+                billingDetails.lastName &&
+                billingDetails.country &&
+                billingDetails.streetAddress &&
+                billingDetails.town &&
+                billingDetails.postcode &&
+                billingDetails.phone &&
+                billingDetails.email &&
+                document.getElementById("terms").checked
+              ) {
+                navigate("/order-confirmation");
+              } else {
+                alert(
+                  "Please fill in all required fields and accept the terms."
+                );
+              }
             }}
           >
             PLACE ORDER
           </button>
+
           <div className="mt-4 text-center">
             <p className="font-bold">GUARANTEED SAFE CHECKOUT</p>
             <div className="flex justify-center space-x-2 mt-2">
