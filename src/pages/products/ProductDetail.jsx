@@ -243,8 +243,7 @@ const ProductDetail = () => {
       </div>
 
       <div className="border-t pt-6">
-        <div className="flex border-b">
-          {tabs.map((tab) => (
+      <div className="flex flex-col lg:flex-row border-b">          {tabs.map((tab) => (
             <button
               key={tab}
               className={`px-4 py-2 ${

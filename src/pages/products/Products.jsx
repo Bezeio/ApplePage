@@ -12,27 +12,38 @@ import bannerProduct from "../../static/media/laptop-with-colorful-screen-white-
 import Navbar from "../components/Navbar.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { products } from "../../services/service.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Products = () => {
   const [filteredProducts, setFilteredProducts] = useState(products);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1000);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleCategorySelect = (category) => {
     if (category === "All") {
       setFilteredProducts(products);
     } else {
-      setFilteredProducts(products.filter(product => product.categories.includes(category)));
+      setFilteredProducts(
+        products.filter((product) => product.categories.includes(category))
+      );
     }
   };
   return (
     <main className="flex-grow container mx-auto max-w-[80%] py-8">
       <div className="flex">
-        <Sidebar onCategorySelect={handleCategorySelect}/>
-        <div className="w-3/4">
-        <nav className=" lg:justify-between lg:items-center ">
-
-          <Navbar onCategorySelect={handleCategorySelect}/>
+        {!isMobile && <Sidebar onCategorySelect={handleCategorySelect} />}
+        <div className={isMobile ? "w-full" : "w-3/4"}>
+          <nav className="lg:justify-between lg:items-center ">
+            <Navbar onCategorySelect={handleCategorySelect} />
           </nav>
           <h1 className="text-4xl font-bold mb-4">BUY IPHONE WITH BITCOIN</h1>
           <h2 className="text-2xl mb-4">BUY APPLE PRODUCTS WITH CRYPTO</h2>
@@ -46,7 +57,7 @@ const Products = () => {
 
           {/* Product grid */}
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProducts.map((product) => (
+            {filteredProducts.map((product) => (
               <div key={product.id} className="border p-4 rounded-lg">
                 <Link to={`/product/${product.id}`}>
                   <div className="relative mb-4">

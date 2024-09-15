@@ -8,11 +8,11 @@ const NavItem = ({ text, hasDropdown, categories, onCategorySelect }) => {
 
   return (
     <li
-      className="relative p-2 text-center cursor-pointer group"
+      className="relative text-center cursor-pointer group lg:p-2 md:p-0"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <div className="flex items-center">
+      <div className="flex items-center text-xs lg:text-base md:text-sm">
         {text}
         {hasDropdown && <ChevronDown size={16} className="ml-1" />}
       </div>
