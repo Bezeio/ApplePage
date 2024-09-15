@@ -6,6 +6,7 @@ import Products from "./pages/products/Products.jsx";
 import ProductDetail from "./pages/products/ProductDetail.jsx";
 import Cart from "./pages/cart/Cart.jsx";
 import Checkout from "./pages/cart/Checkout.jsx";
+import OrderConfirmation from "./pages/cart/OrderConfirm.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-confirmation" element={<OrderConfirmation />} />
             {/* <Route path="/detail" element={<DetailProduct />} />
             <Route path="/form" element={<AmazonForm />} /> */}
           </Routes>

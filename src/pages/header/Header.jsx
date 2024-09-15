@@ -42,15 +42,13 @@ const Header = () => {
               <img src={logoProduct} className="max-w-[80%]" />
             </Link>
           </div>
-          <div className="flex items-center space-x-12">
-            <div className="flex items-center">
+          <div className="flex items-center space-x-12 max-w-[100%]">
               <input
                 type="text"
                 placeholder="Search for..."
-                className="px-2 py-1 border-l"
+                className="py-1"
               />
               <Search className="w-5 h-5 text-gray-500" />
-            </div>
           </div>
           <div className="flex items-center space-x-4">
             {/* <Heart className="w-6 h-6" />

@@ -1,4 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const countries = [
+  "United States",
+  "Canada",
+  "United Kingdom",
+  "Australia",
+  "Germany",
+  "France",
+  "Japan",
+  "China",
+  "India",
+  "Brazil",
+  "Mexico",
+  "Italy",
+  "Spain",
+  "Netherlands",
+  "Sweden",
+  "Norway",
+  "Denmark",
+  "Finland",
+  "Switzerland",
+  "Austria",
+  "Belgium",
+  "Portugal",
+  "Greece",
+  "Ireland",
+  "New Zealand",
+  "South Africa",
+  "Singapore",
+  "Malaysia",
+  "Thailand",
+  "Vietnam",
+  "Indonesia",
+  "Philippines",
+  "South Korea",
+  "Russia",
+  "Ukraine",
+  "Poland",
+  "Czech Republic",
+  "Hungary",
+  "Romania",
+  "Turkey",
+  "Egypt",
+  "Saudi Arabia",
+  "United Arab Emirates",
+  "Israel",
+  "Argentina",
+  "Chile",
+  "Colombia",
+  "Peru",
+  "Venezuela",
+];
 
 const CheckoutPage = () => {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -14,6 +67,12 @@ const CheckoutPage = () => {
     phone: "",
     email: "",
   });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("billingDetails", JSON.stringify(billingDetails));
+  }, [billingDetails]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +94,7 @@ const CheckoutPage = () => {
                 className="w-1/2 p-2 border rounded"
                 placeholder="First name"
                 name="firstName"
+                required
                 value={billingDetails.firstName}
                 onChange={handleInputChange}
               />
@@ -42,6 +102,7 @@ const CheckoutPage = () => {
                 className="w-1/2 p-2 border rounded"
                 placeholder="Last name"
                 name="lastName"
+                required
                 value={billingDetails.lastName}
                 onChange={handleInputChange}
               />
@@ -49,16 +110,22 @@ const CheckoutPage = () => {
             <select
               className="w-full p-2 border rounded"
               name="country"
+              required
               value={billingDetails.country}
               onChange={handleInputChange}
             >
               <option value="">Select a country / region...</option>
-              {/* Add country options here */}
+              {countries.map((country, index) => (
+                <option key={index} value={country}>
+                  {country}
+                </option>
+              ))}
             </select>
             <input
               className="w-full p-2 border rounded"
               placeholder="House number and street name"
               name="streetAddress"
+              required
               value={billingDetails.streetAddress}
               onChange={handleInputChange}
             />
@@ -73,6 +140,7 @@ const CheckoutPage = () => {
               className="w-full p-2 border rounded"
               placeholder="Town / City"
               name="town"
+              required
               value={billingDetails.town}
               onChange={handleInputChange}
             />
@@ -87,6 +155,7 @@ const CheckoutPage = () => {
               className="w-full p-2 border rounded"
               placeholder="Postcode"
               name="postcode"
+              required
               value={billingDetails.postcode}
               onChange={handleInputChange}
             />
@@ -94,6 +163,7 @@ const CheckoutPage = () => {
               className="w-full p-2 border rounded"
               placeholder="Phone"
               name="phone"
+              required
               value={billingDetails.phone}
               onChange={handleInputChange}
             />
@@ -101,6 +171,7 @@ const CheckoutPage = () => {
               className="w-full p-2 border rounded"
               placeholder="Email address"
               name="email"
+              required
               value={billingDetails.email}
               onChange={handleInputChange}
             />
@@ -208,7 +279,13 @@ const CheckoutPage = () => {
               I want to receive updates about products and promotions.
             </label>
           </div>
-          <button className="w-full bg-black text-white py-2 px-4 rounded mt-4 hover:bg-gray-800">
+          <button
+            type="submit"
+            className="w-full bg-black text-white py-2 px-4 rounded mt-4 hover:bg-gray-800"
+            onClick={() => {
+              navigate("/order-confirmation");
+            }}
+          >
             PLACE ORDER
           </button>
           <div className="mt-4 text-center">

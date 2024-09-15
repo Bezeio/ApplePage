@@ -8,6 +8,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import logoProduct from "../../static/media/buy-iphone-with-bitcoin-crypto-currency.png";
+import bannerProduct from "../../static/media/laptop-with-colorful-screen-white-background-3d-rendering.jpg";
 import Navbar from "../components/Navbar.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { products } from "../../services/service.js";
@@ -82,9 +83,9 @@ const Products = () => {
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="md:w-1/2">
             <img
-              src="/api/placeholder/500/300"
+              src={bannerProduct}
               alt="Eco-Friendly Laptop Stand"
-              className="w-full rounded-lg shadow-lg"
+              className="w-full rounded-lg"
             />
           </div>
           <div className="md:w-1/2 space-y-4">
@@ -172,7 +173,7 @@ const Products = () => {
               </Link>
               <button
                 onClick={() => navigate(`/product/${product.id}`)}
-                className="mt-3 w-full bg-customGray text-white py-2 rounded hover:bg-customBlue transition duration-300 flex items-center justify-center"
+                className="mt-3 w-full bg-customGray text-white py-2 hover:bg-customBlue transition duration-300 flex items-center justify-center"
               >
                 <ShoppingCart className="mr-2" />
                 SELECT OPTIONS
