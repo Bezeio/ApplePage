@@ -12,6 +12,7 @@ module.exports = {
         customBlue: '#598ecb',
         customBlack: '#33373c',
         customDarkGreen: '#3b7d2f',
+        customBlack: '#646464',
       }
     },
   },

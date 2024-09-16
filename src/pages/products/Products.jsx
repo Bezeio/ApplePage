@@ -71,10 +71,10 @@ const Products = () => {
                     </span>
                   </div>
                   <h3 className="font-bold">{product.name}</h3>
-                  <p className="text-gray-600 line-through">
+                  <p className="text-customGray line-through font-bold">
                     From: ${product.price.toFixed(2)}
                   </p>
-                  <p className="text-green-600 font-bold">
+                  <p className="text-customBlue font-bold">
                     From: ${product.salePrice.toFixed(2)}
                   </p>
                 </Link>
@@ -175,10 +175,10 @@ const Products = () => {
                   </span>
                 </div>
                 <h3 className="font-bold">{product.name}</h3>
-                <p className="text-gray-600 line-through">
+                <p className="text-customGray line-through">
                   From: ${product.price.toFixed(2)}
                 </p>
-                <p className="text-green-600 font-bold">
+                <p className="text-customBlue font-bold">
                   From: ${product.salePrice.toFixed(2)}
                 </p>
               </Link>

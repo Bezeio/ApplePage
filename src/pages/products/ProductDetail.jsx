@@ -17,7 +17,7 @@ import {
 import Navbar from "../components/Navbar";
 import Guaranteed from "../components/Guaranteed";
 import { useParams } from "react-router-dom";
-import { addToCart, products } from "../../services/service";
+import { addToCart, priceData, products } from "../../services/service";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -27,7 +27,17 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [appleCare, setAppleCare] = useState("None");
   const [activeTab, setActiveTab] = useState("DESCRIPTION");
-  const [mainImage, setMainImage] = useState("");
+  const [mainImage, setMainImage] = useState(0);
+  const [marketPrice, setMarketPrice] = useState(0);
+  const [currentPrice, setCurrentPrice] = useState(0);
+
+  const updatePrices = (productName, selectedMemory) => {
+    if (priceData[productName] && priceData[productName][selectedMemory]) {
+      const { market, sale } = priceData[productName][selectedMemory];
+      setMarketPrice(market);
+      setCurrentPrice(sale);
+    }
+  };
 
   useEffect(() => {
     const foundProduct = products.find((p) => p.id === parseInt(id));
@@ -36,8 +46,15 @@ const ProductDetail = () => {
       setColor(foundProduct.color[0]);
       setMemory(foundProduct.internalMemory[0]);
       setMainImage(foundProduct.image);
+      updatePrices(foundProduct.name, foundProduct.internalMemory[0]);
     }
   }, [id]);
+
+  useEffect(() => {
+    if (product && memory) {
+      updatePrices(product.name, memory);
+    }
+  }, [product, memory]);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -70,11 +87,15 @@ const ProductDetail = () => {
             <span>29 items sold with Bitcoin in last 24 hours</span>
           </div>
           <div className="mb-4">
-            <span className="line-through text-gray-500 mr-2 font-bold text-2xl">
-              ${product.price.toFixed(2)}
+            <span className="line-through text-customGray mr-2 font-bold text-2xl">
+              ${" "}
+              {marketPrice ? marketPrice.toFixed(2) : product.price.toFixed(2)}
             </span>
             <span className="text-blue-600 font-bold text-2xl">
-              ${product.salePrice.toFixed(2)}
+              $
+              {currentPrice
+                ? currentPrice.toFixed(2)
+                : product.salePrice.toFixed(2)}
             </span>
           </div>
           <p className="mb-4">Estimated delivery: 16/09/2024</p>
@@ -163,7 +184,7 @@ const ProductDetail = () => {
                 </button>
               </div>
               <button
-                className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded"
+                className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 hover:bg-customBlack transition duration-300"
                 onClick={handleAddToCart}
               >
                 <ShoppingCart size={16} />
@@ -186,13 +207,13 @@ const ProductDetail = () => {
                   <br />
                   <span className="text-sm text-gray-500">on each product</span>
                 </p>
-                <button className="bg-gray-800 text-white px-4 py-2 rounded">
+                <button className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 hover:bg-customBlack transition duration-300">
                   ADD
                 </button>
               </div>
             </div>
 
-            <button className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded mb-4">
+            <button className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 hover:bg-customBlack transition duration-300 mb-4">
               <HelpCircle size={16} />
               NEED HELP?
             </button>
@@ -243,7 +264,9 @@ const ProductDetail = () => {
       </div>
 
       <div className="border-t pt-6">
-      <div className="flex flex-col lg:flex-row border-b">          {tabs.map((tab) => (
+        <div className="flex flex-col lg:flex-row border-b">
+          {" "}
+          {tabs.map((tab) => (
             <button
               key={tab}
               className={`px-4 py-2 ${
