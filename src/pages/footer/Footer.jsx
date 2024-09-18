@@ -14,7 +14,7 @@ import logoBrand from "../../static/media/apple-with-bitcoin-partners-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-customBlack text-gray-300 py-8 px-4 leading-loose">
+    <footer className="bg-customFooterColor text-gray-300 py-8 px-4 leading-loose">
       <div className="container mx-auto">
         {/* Top section */}
         <div className="flex flex-wrap justify-between mb-8 pb-6 border-b border-customDarkGray">

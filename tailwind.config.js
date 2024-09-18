@@ -10,7 +10,7 @@ module.exports = {
         customLightGray: '#f7f7f7',
         customDarkGray: '#3c4147',
         customBlue: '#598ecb',
-        customBlack: '#33373c',
+        customFooterColor: '#33373c',
         customDarkGreen: '#3b7d2f',
         customBlack: '#646464',
       }
