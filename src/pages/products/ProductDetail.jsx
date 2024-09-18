@@ -30,6 +30,7 @@ const ProductDetail = () => {
   const [mainImage, setMainImage] = useState(0);
   const [marketPrice, setMarketPrice] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   const updatePrices = (productName, selectedMemory) => {
     if (priceData[productName] && priceData[productName][selectedMemory]) {
@@ -70,10 +71,20 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     addToCart(product.id, quantity, color, memory, appleCare);
   };
+  
+  const handleCategorySelect = (category) => {
+    if (category === "All") {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(
+        products.filter((product) => product.categories.includes(category))
+      );
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-4 mb-12">
-      <Navbar />
+      <Navbar onCategorySelect={handleCategorySelect}/>
       <div className="flex flex-col md:flex-row gap-8 text-left">
         <div className="md:w-1/2">
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>

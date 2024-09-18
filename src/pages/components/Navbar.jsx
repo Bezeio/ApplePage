@@ -19,22 +19,32 @@ const NavItem = ({ text, hasDropdown, categories, onCategorySelect }) => {
       {hasDropdown && isOpen && (
         <div className="absolute top-full left-0 bg-white shadow-md py-2 w-48 z-10 text-left">
           {categories.map((category) => (
-            <a
+            <Link
               key={category}
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
+              to={`/products?category=${encodeURIComponent(category)}`}
+              onClick={() => {
+                setIsOpen(false);
                 if (typeof onCategorySelect === "function") {
                   onCategorySelect(category);
-                } else {
-                  console.error("onCategorySelect is not a function");                  
                 }
               }}
               className="block px-4 py-2 hover:bg-gray-100"
             >
               {category}
-            </a>
+            </Link>
           ))}
+          <Link
+            to="/products"
+            onClick={() => {
+              setIsOpen(false);
+              if (typeof onCategorySelect === "function") {
+                onCategorySelect("All");
+              }
+            }}
+            className="block px-4 py-2 hover:bg-gray-100"
+          >
+            All products
+          </Link>
           <a
             href="#"
             onClick={(e) => {
@@ -64,7 +74,7 @@ const Navbar = ({ onCategorySelect }) => {
     <nav className="shadow-sm">
       <div className="container mx-auto px-4 py-2">
         <ul className="flex justify-center space-x-6">
-          <Link to="/">
+          <Link to="/products">
             <NavItem text="HOME" />
           </Link>
           <NavItem

@@ -38,7 +38,7 @@ const Header = () => {
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="text-3xl font-bold text-blue-500">
-            <Link to="/">
+            <Link to="/products">
               <img src={logoProduct} className="max-w-[80%]" />
             </Link>
           </div>

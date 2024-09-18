@@ -10,7 +10,7 @@ import {
 import logoProduct from "../../static/media/buy-iphone-with-bitcoin-crypto-currency.png";
 import bannerProduct from "../../static/media/laptop-with-colorful-screen-white-background-3d-rendering.jpg";
 import Navbar from "../components/Navbar.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { products } from "../../services/service.js";
 import { useEffect, useState } from "react";
 
@@ -18,25 +18,35 @@ const Products = () => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1000);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const handleResize = () => setIsMobile(window.innerWidth < 1000);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const category = params.get('category');
+
+    if (category && category !== 'All') {
+      setFilteredProducts(products.filter(product => 
+        product.categories.includes(category)
+      ));
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [location.search]);
 
   const handleCategorySelect = (category) => {
     if (category === "All") {
-      setFilteredProducts(products);
+      navigate('/products');
     } else {
-      setFilteredProducts(
-        products.filter((product) => product.categories.includes(category))
-      );
+      navigate(`/products?category=${encodeURIComponent(category)}`);
     }
   };
+
   return (
     <main className="flex-grow container mx-auto max-w-[80%] py-8">
       <div className="flex">
