@@ -16,7 +16,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Guaranteed from "../components/Guaranteed";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, priceData, products } from "../../services/service";
 
 const ProductDetail = () => {
@@ -31,7 +31,7 @@ const ProductDetail = () => {
   const [marketPrice, setMarketPrice] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState(products);
-
+  const navigate = useNavigate()
   const updatePrices = (productName, selectedMemory) => {
     if (priceData[productName] && priceData[productName][selectedMemory]) {
       const { market, sale } = priceData[productName][selectedMemory];
@@ -70,6 +70,11 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     addToCart(product.id, quantity, color, memory, appleCare);
+  };
+
+  const handleBuyNow = () => {
+    addToCart(product.id, quantity, color, memory, appleCare);
+    navigate('/checkout');
   };
   
   const handleCategorySelect = (category) => {
@@ -205,7 +210,7 @@ const ProductDetail = () => {
 
             <div className="text-center mb-4">OR</div>
 
-            <button className="w-full bg-green-600 text-white py-2 mb-6 hover:bg-customDarkGreen transition duration-300">
+            <button className="w-full bg-green-600 text-white py-2 mb-6 hover:bg-customDarkGreen transition duration-300" onClick={handleBuyNow}>
               <CreditCard className="inline mr-2" size={16} />
               BUY NOW
             </button>
